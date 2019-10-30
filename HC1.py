@@ -9,10 +9,14 @@ from PIL import ImageFont, ImageDraw
 import numpy as np
   
  
- 
 video_src = 'D:/PROJECTS/Python/HUMAN COUNT/dataset/VID_20191029_185101.mp4'
-video_src = 'E:/Google Drive/PCDS/106_20150509_back/noisy/uncrowd/2015_05_09_15_05_40BackColor.avi'
-outputpath = 'D:/PROJECTS/Python/dataExtract/VID7/'
+video_src = 'E:/PROJECT ALL/kaggle/project/human Count/dataset/PCDS/106_20150509_back/noisy/uncrowd/2015_05_09_15_05_40BackColor.avi'
+#outputpath = 'D:/PROJECTS/Python/dataExtract/VID7/'
+
+ 
+#video_src = 'D:/PROJECTS/Python/HUMAN COUNT/dataset/VID_20191029_185101.mp4'
+#video_src = 'E:/Google Drive/PCDS/106_20150509_back/noisy/uncrowd/2015_05_09_15_05_40BackColor.avi'
+#outputpath = 'D:/PROJECTS/Python/dataExtract/VID7/'
  
 
  
