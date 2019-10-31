@@ -8,6 +8,16 @@ cascade_src = 'E:/PROJECT ALL/kaggle/project/human Count/HumanCountraju/haarcasc
 video_src = 'E:/PROJECT ALL/kaggle/project/human Count/dataset/Project 1.avi'
 #video_src = 'E:/Google Drive/PCDS/106_20150509_back/noisy/uncrowd/2015_05_09_15_05_40BackColor.avi'
 
+
+cascade_src = 'D:/PROJECTS/Python/HUMAN COUNT/human_count_raju/haarcascade/classifier/cascade.xml'
+
+video_src = 'D:/PROJECTS/Python/HUMAN COUNT/dataset/VID_20191030_180929.mp4'
+
+
+
+
+
+
 #moveDiff=0
 
 def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
