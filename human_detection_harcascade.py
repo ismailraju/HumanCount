@@ -6,15 +6,16 @@ cascade_src = 'E:/PROJECT ALL/kaggle/project/human Count/HumanCountraju/haarcasc
 
 #cascade_src = 'D:/C-Drive/opencv3.4.3/build/etc/haarcascades/haarcascade_fullbody.xml'
 video_src = 'E:/PROJECT ALL/kaggle/project/human Count/dataset/Project 1.avi'
+video_src ='E:/PROJECT ALL/kaggle/project/human Count/dataset/VID_20191030_180929.mp4'
+video_src ='E:/PROJECT ALL/kaggle/project/human Count/dataset/PCDS/106_20150509_back/noisy/crowd/2015_05_09_15_30_14BackColor.avi'
 #video_src = 'E:/Google Drive/PCDS/106_20150509_back/noisy/uncrowd/2015_05_09_15_05_40BackColor.avi'
 
 
-cascade_src = 'D:/PROJECTS/Python/HUMAN COUNT/human_count_raju/haarcascade/classifier/cascade.xml'
+#cascade_src = 'D:/PROJECTS/Python/HUMAN COUNT/human_count_raju/haarcascade/classifier/cascade.xml'
+#
+#video_src = 'D:/PROJECTS/Python/HUMAN COUNT/dataset/VID_20191030_180929.mp4'
 
-video_src = 'D:/PROJECTS/Python/HUMAN COUNT/dataset/VID_20191030_180929.mp4'
-
-
-
+ALLOWED_RECOGNITION_MISSING_FRAME=5
 
 
 
@@ -56,7 +57,8 @@ def union(a,b):
   y = min(a[1], b[1])
   w = max(a[0]+a[2], b[0]+b[2]) - x
   h = max(a[1]+a[3], b[1]+b[3]) - y
-  return (x, y, w, h)
+  d = abs(a[4]-b[4])
+  return (x, y, w, h,d)
 
 
 def crossMiddle(x1,x2):
@@ -99,6 +101,68 @@ def drawCount(img,s):
         fontColor,
         lineType)
     return img
+
+
+def enterOrExit(points):
+    moveDiff=0
+    for i in range(1,len(points)):
+        moveDiff=moveDiff+(points[i][0]-points[i-1][0])
+        print((points[i-1][0] , points[i-1][1]), (points[i][0], points[i][1]))
+    print(moveDiff)
+    if(moveDiff>0):
+        return (0,1)
+
+        print("EXIT")
+    else:
+        print("ENTER")
+        return (1,0)
+    return 0,0
+        
+        
+    
+    
+
+def position_link(new_position):
+
+    isInserted=0
+    for i in range( len(person_position)):
+
+            
+        (x, y, w, h,diff)=union(person_position[i][len(person_position[i])-1],new_position)
+        print((x, y, w, h,diff))
+        if(w>0 and h>0):
+            person_position[i].extend([new_position])
+            isInserted=1
+            
+#        if(diff>ALLOWED_RECOGNITION_MISSING_FRAME):
+#            (Enter1,Exit1)=enterOrExit(person_position[i])
+#            ENTER =ENTER+Enter1
+#            EXIT =EXIT+Exit1
+#            person_position.pop(i)
+            
+    if(isInserted==0):
+
+        person_position.append([new_position])
+
+
+
+
+def syn(count,ENTER,EXIT):  
+    for i in range( len(person_position)):
+        diff=abs(count-person_position[i][len(person_position[i])-1][4])
+        if(diff>ALLOWED_RECOGNITION_MISSING_FRAME):
+            (Enter1,Exit1)=enterOrExit(person_position[i])
+            ENTER =ENTER+Enter1
+            EXIT =EXIT+Exit1
+            person_position.pop(i)
+            
+    return (ENTER,EXIT)
+        
+        
+            
+        
+    
+    
 #cascade_src = 'D:/C-Drive/opencv3.4.3/build/etc/haarcascades/haarcascade_upperbody.xml'
 ##cascade_src = 'D:/C-Drive/opencv3.4.3/build/etc/haarcascades/haarcascade_fullbody.xml'
 #video_src = 'D:/PROJECTS/Python/HUMAN COUNT/dataset/VID_20191029_185101.mp4'
@@ -109,8 +173,15 @@ cap = cv2.VideoCapture(video_src)
 car_cascade = cv2.CascadeClassifier(cascade_src)
 
 pre_rect=[(0,0,0,0)]
+global  ENTER 
+global  EXIT 
+person_position=[]
+ENTER =0
+EXIT=0
 
 
+
+count=0
 while True:
     ret, img = cap.read()
     img = image_resize(img, height = 200)
@@ -130,14 +201,17 @@ while True:
 #            y1=y
 #            w1=w
 #            h1=h
-        xxx,yyy,www,hhh=union(pre_rect[len(pre_rect)-1],(x,y,w,h))
-        pre_rect.append((x,y,w,h))
-        img,cross=drawLines(pre_rect,img)
-        img=drawCount(img,"Enter:"+str(cross)+", Exit:0")
-        cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2)      
+        position_link((x,y,w,h,count))
+#        xxx,yyy,www,hhh,dddd=union(pre_rect[len(pre_rect)-1],(x,y,w,h,count))
+#        pre_rect.append((x,y,w,h,dddd))
+#        img,cross=drawLines(pre_rect,img)
+        
+        cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2) 
+    ENTER,EXIT =syn(count,ENTER,EXIT)
 #    cv2.rectangle(img,(x1,y1),(x1+w1,y1+h1),(0,0,255),2)      
-    
+    img=drawCount(img,"Enter:"+str(ENTER)+", Exit:"+str(EXIT))
     cv2.imshow('img', img)
+    count+=1
     
     
     if cv2.waitKey(33) == 27:
