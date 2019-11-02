@@ -5,8 +5,8 @@ import cv2
 cascade_src = 'E:/PROJECT ALL/kaggle/project/human Count/HumanCountraju/haarcascade/classifier/cascade.xml'
 
 #cascade_src = 'D:/C-Drive/opencv3.4.3/build/etc/haarcascades/haarcascade_fullbody.xml'
-video_src = 'E:/PROJECT ALL/kaggle/project/human Count/dataset/Project 1.avi'
-video_src ='E:/PROJECT ALL/kaggle/project/human Count/dataset/VID_20191030_180929.mp4'
+#video_src = 'E:/PROJECT ALL/kaggle/project/human Count/dataset/Project 1.avi'
+#video_src ='E:/PROJECT ALL/kaggle/project/human Count/dataset/VID_20191030_180929.mp4'
 video_src ='E:/PROJECT ALL/kaggle/project/human Count/dataset/PCDS/106_20150509_back/noisy/crowd/2015_05_09_15_30_14BackColor.avi'
 #video_src = 'E:/Google Drive/PCDS/106_20150509_back/noisy/uncrowd/2015_05_09_15_05_40BackColor.avi'
 
