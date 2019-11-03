@@ -8,7 +8,7 @@ import pytesseract
 from PIL import ImageFont, ImageDraw 
 
 video_src = 'D:/PROJECTS/Python/HUMAN COUNT/dataset/VID_20191029_185101.mp4'
-video_src = 'E:/PROJECT ALL/kaggle/project/human Count/dataset/PCDS/106_20150509_back/noisy/uncrowd/2015_05_09_15_05_40BackColor.avi'
+#video_src = 'E:/PROJECT ALL/kaggle/project/human Count/dataset/PCDS/106_20150509_back/noisy/uncrowd/2015_05_09_15_05_40BackColor.avi'
 
 video_src = 'E:/PROJECT ALL/kaggle/project/human Count/dataset/Project 1.avi'
 
@@ -102,7 +102,7 @@ while True:
 #C – Constant subtracted from the mean or weighted mean (see the details below). Normally, it is positive but may be zero or negative as well.
 #        Adaptive Thresholding
  
-#        img = cv2.medianBlur(img,5)
+        img = cv2.medianBlur(img,21)
 
         ret,th1 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
         th2 = cv2.adaptiveThreshold(img,255,cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,31,0)
@@ -117,8 +117,8 @@ while True:
         th2_sub=th2_pre-th2
         th3_sub=th3_pre-th3
         
-        images = [img, th1, th2, th3]
-#        images = [img, th1_sub, th2_sub, th3_sub]
+#        images = [img, th1, th2, th3]
+        images = [img, th1_sub, th2_sub, th3_sub]
         
         th1_pre=th1
         th2_pre=th2

@@ -341,7 +341,7 @@ while True:
         except:
             os.mkdir(directory)
         
-        cv2.imwrite(file_output_path, gray[ y:y+h,x:x+w])
+#        cv2.imwrite(file_output_path, gray[ y:y+h,x:x+w])
 
         img=draw(img,"p"+str(linked_index),x,y)
         cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2) 
