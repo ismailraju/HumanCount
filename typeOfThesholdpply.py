@@ -67,18 +67,18 @@ while True:
         images = [img, thresh1_sub, thresh2_sub, thresh3_sub, thresh4_sub, thresh5_sub]
         s=""
         
-        for i in  range(6):
-            plt.subplot(2,3,i+1),plt.imshow(images[i],'gray') 
-            plt.title(titles[i] )
-            plt.xticks([]),plt.yticks([])
- 
-        thresh1_pre=thresh1
-        thresh2_pre=thresh2
-        thresh3_pre=thresh3
-        thresh4_pre=thresh4
-        thresh5_pre=thresh5   
-
-        plt.show()
+#        for i in  range(6):
+#            plt.subplot(2,3,i+1),plt.imshow(images[i],'gray') 
+#            plt.title(titles[i] )
+#            plt.xticks([]),plt.yticks([])
+# 
+#        thresh1_pre=thresh1
+#        thresh2_pre=thresh2
+#        thresh3_pre=thresh3
+#        thresh4_pre=thresh4
+#        thresh5_pre=thresh5   
+#
+#        plt.show()
 ##        fig1 = plt.gcf()
 #        
 ##        plt.savefig("out.jpg")
@@ -117,8 +117,8 @@ while True:
         th2_sub=th2_pre-th2
         th3_sub=th3_pre-th3
         
-#        images = [img, th1, th2, th3]
-        images = [img, th1_sub, th2_sub, th3_sub]
+        images = [img, th1, th2, th3]
+#        images = [img, th1_sub, th2_sub, th3_sub]
         
         th1_pre=th1
         th2_pre=th2
@@ -129,13 +129,13 @@ while True:
 
 
 #        s=""
-#        for i in  range(4):
-#            plt.subplot(2,2,i+1),plt.imshow(images[i],'gray')
-##            plt.title(titles[i])
-#           
-#            plt.xticks([]),plt.yticks([])
-#            
-#        plt.show()
+        for i in  range(4):
+            plt.subplot(2,2,i+1),plt.imshow(images[i],'gray')
+#            plt.title(titles[i])
+           
+            plt.xticks([]),plt.yticks([])
+            
+        plt.show()
 #        plt.savefig(outputpath+file +".jpg" )
 
         
